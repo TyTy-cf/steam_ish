@@ -11,6 +11,7 @@
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Nickname</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,9 @@
                     <td>{{ account.name }}</td>
                     <td>{{ account.email }}</td>
                     <td>{{ account.nickname }}</td>
+                    <td>
+                        <a href="{{ path('index_librarie', {'id': account.id}) }}">Voir la bibliothèque de jeux</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -19,22 +19,22 @@ class LibrarieRepository extends ServiceEntityRepository
         parent::__construct($registry, Libraries::class);
     }
 
-    // /**
-    //  * @return Librarie[] Returns an array of Librarie objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param $account
+     * @return Libraries[] Returns an array of Librarie objects
+     */
+    public function findLibrariesByAccount($account): array
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('librarie')
+            ->join('librarie.account', 'account')
+            ->join('librarie.game', 'game')
+            ->andWhere('librarie.account = :account')
+            ->setParameter('account', $account)
+            ->orderBy('game.name', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Librarie
