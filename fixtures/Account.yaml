@@ -1,6 +1,6 @@
 
 App\Entity\Accounts:
-    account_{0..799}:
+    account_{0..999}:
         name (unique): <userName()>
         email (unique): <email()>
         nickname: <userName()>
@@ -238,20 +238,110 @@ App\Entity\Games:
         price: <numberBetween(10, 15)>
         genres: '@genre_{2, 3}'
         languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_31:
+        name: "Among Us"
+        publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
+        price: <numberBetween(0, 5)>
+        genres: ['@genre_3']
+        languages: ['@language_1']
+    games_32:
+        name: "Doom Eternal"
+        publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
+        price: <numberBetween(50, 60)>
+        genres: '@genre_{2, 8}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_33:
+        name: "Star Wars Battlefront II"
+        publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
+        price: <numberBetween(35, 40)>
+        genres: '@genre_{2, 8, 9}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_34:
+        name: "ArmA III"
+        publishedAt: <dateTimeBetween('2013-01-01', '2013-12-31')>
+        price: <numberBetween(7, 28)>
+        genres: '@genre_{0, 1, 2, 8}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_35:
+        name: "Total War : Warhammer II"
+        publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
+        price: <numberBetween(50, 60)>
+        genres: '@genre_{0, 8}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_36:
+        name: "ARK : Survival Evolved"
+        publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
+        price: <numberBetween(50, 60)>
+        genres: '@genre_{3, 4, 8, 9}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_37:
+        name: "Dead by Daylight"
+        publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
+        price: <numberBetween(25, 30)>
+        genres: ['@genre_8']
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_38:
+        name: "Fallout"
+        publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
+        price: <numberBetween(30, 40)>
+        genres: [ '@genre_4' ]
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_39:
+        name: "The Binding of Isaac : Rebirth"
+        publishedAt: <dateTimeBetween('2014-01-01', '2014-12-31')>
+        price: <numberBetween(10, 15)>
+        genres: [ '@genre_8' ]
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_40:
+        name: "Star Wars Jedi : Fallen Order"
+        publishedAt: <dateTimeBetween('2019-01-01', '2019-12-31')>
+        price: <numberBetween(35, 40)>
+        genres: '@genre_{8, 9}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_41:
+        name: "Left 4 Dead 2"
+        publishedAt: <dateTimeBetween('2009-01-01', '2009-12-31')>
+        price: <numberBetween(5, 10)>
+        genres: '@genre_{2, 8}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_42:
+        name: "Battlefield V"
+        publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
+        price: <numberBetween(50, 60)>
+        genres: '@genre_{2, 8}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_43:
+        name: "Age of Mythology"
+        publishedAt: <dateTimeBetween('2014-01-01', '2014-12-31')>
+        price: <numberBetween(25, 30)>
+        genres: '@genre_{0, 1}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_44:
+        name: "The Sims 3"
+        publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
+        price: <numberBetween(15, 20)>
+        genres: ['@genre_1']
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
+    games_45:
+        name: "Far Cry 5"
+        publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
+        price: <numberBetween(55, 60)>
+        genres: '@genre_{8, 9}'
+        languages: '@language_{0, 1, 2, 3, 4, 5, 6, 7}'
 
 App\Entity\Comments:
     comments_{0..1999}:
         content: <paragraph(4)>
         createAt: <dateTimeBetween('2015-01-01', '2021-02-23')>
-        account: '@account_<numberBetween(0, 790)>'
-        game: '@games_<numberBetween(0, 30)>'
+        account: '@account_<numberBetween(0, 899)>'
+        game: '@games_<numberBetween(0, 45)>'
         upvotes: <numberBetween(0, 100)>
         downvotes: <numberBetween(0, 20)>
 
 App\Entity\Libraries:
-    librarie_{0..4999}:
+    librarie_{0..7999}:
         installed: <numberBetween(0, 1)>
-        gameTime: <numberBetween(10000, 3000000)>
-        lastUsed: <dateTimeBetween('2020-12-01', '2021-02-23')>
-        account: '@account_<numberBetween(0, 799)>'
-        game: '@games_<numberBetween(0, 30)>'
+        gameTime: <numberBetween(8000, 4000000)>
+        lastUsed: <dateTimeBetween('2020-12-16', '2021-02-27')>
+        account: '@account_<numberBetween(0, 990)>'
+        game: '@games_<numberBetween(0, 45)>'
