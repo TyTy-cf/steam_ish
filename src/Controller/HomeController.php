@@ -29,6 +29,6 @@ class HomeController extends AbstractController
      * @return Response
      */
     public function test() {
-        return $this->render('test.html.twig');
+        return $this->render('souk/test.html.twig');
     }
 }

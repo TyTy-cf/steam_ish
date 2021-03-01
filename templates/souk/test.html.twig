@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container background-test">
+        {# for int i = 0; i < 10; i++ #}
+        {% for i in range(0, 10) %}
+            {% include 'souk/number.html.twig' with {'number': i} %}
+        {% endfor %}
+
+        {# Date du jour #}
+        <p>
+            {{ "now"|date }}
+        </p>
+
+        {# Si la variable sur laquelle on applique le fitlre default n'existe pas, on affiche le message #}
+        <p>
+            {{ notstashedvalue|default('Cette variable n\'existe pas')  }}
+        </p>
+    </div>
+{% endblock %}
+
