@@ -19,15 +19,15 @@
     <div class="container">
         <div>
             <a class="btn btn-primary" href="{{ path('accounts_new') }}">
-                Créer un compte
+                {{ 'account.title_header'|trans }}
             </a>
         </div>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Nickname</th>
+                <th>{{ 'account.form.name'|trans }}</th>
+                <th>{{ 'account.form.email'|trans }}</th>
+                <th>{{ 'account.form.nickname'|trans }}</th>
                 <th></th>
             </tr>
             </thead>

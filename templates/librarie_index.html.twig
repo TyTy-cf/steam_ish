@@ -1,6 +1,8 @@
 
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'general' %}
+
 {% block title %}
     Account de {{ account.name }}
 {% endblock %}
@@ -11,26 +13,31 @@
         <table class="table table-striped col-6">
             <tbody>
                 <tr>
-                    <th>Nom de compte</th>
+                    <th>{{ 'account.form.name'|trans }}</th>
                     <td>{{ account.name }}</td>
                 </tr>
                 <tr>
-                    <th>Email</th>
+                    <th>{{ 'account.form.email'|trans }}</th>
                     <td>{{ account.email }}</td>
                 </tr>
                 <tr>
-                    <th>Pseudo</th>
+                    <th>{{ 'account.form.nickname'|trans }}</th>
                     <td>{{ account.nickname }}</td>
                 </tr>
             </tbody>
         </table>
+        <div class="mb-2">
+            <a href="{{ path('accounts_edit', {'id': account.id}) }}" class="btn btn-info">
+                {{ 'account.library.edit'|trans }}
+            </a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>(I)</th>
-                <th>Nom</th>
-                <th>Temps de jeu</th>
-                <th>Dernière utilisation</th>
+                <th>{{ 'account.library.installed'|trans }}</th>
+                <th>{{ 'account.library.name'|trans }}</th>
+                <th>{{ 'account.library.game_time'|trans }}</th>
+                <th>{{ 'account.library.last_used'|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -53,7 +60,9 @@
             </tbody>
         </table>
         <div class="col-7 text-right">
-            <strong>Total</strong> : {{ totalDuration|sec_to_time }}
+            <strong>
+                {{ 'account.library.total'|trans }}
+            </strong> : {{ totalDuration|sec_to_time }}
         </div>
     </div>
 
