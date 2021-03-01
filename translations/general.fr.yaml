@@ -8,3 +8,16 @@ account:
         nickname: "Pseudo"
     index:
         games: "Ses jeux (%nb%)"
+    btn:
+        return_index: "Retour à la liste des comptes"
+    library:
+        edit: "Modifier"
+        installed: "Installé ?"
+        name: "Nom"
+        game_time: "Temps de jeu"
+        last_used: "Dernière utilisation"
+        total: "Total :"
+    edit:
+        return_account: "Retour au compte"
+        title: "Modifier compte"
+    delete: "Supprimer"
