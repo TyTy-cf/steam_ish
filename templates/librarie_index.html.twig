@@ -23,7 +23,7 @@
                         <tr>
                             <td>{{ library.installed|game_installed }}</td>
                             <td>{{ library.game.name }}</td>
-                            <td>{{ library.gameTime }}</td>
+                            <td>{{ library.gameTime|sec_to_time }}</td>
                             <td>{{ library.lastUsed|date('m/d/Y') }}</td>
                         </tr>
                     {% endfor %}

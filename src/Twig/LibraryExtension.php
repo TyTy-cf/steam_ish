@@ -18,6 +18,7 @@ class LibraryExtension extends AbstractExtension
     {
         return [
             new TwigFilter('game_installed', [$this, 'getGameInstalled']),
+            new TwigFilter('sec_to_time', [$this, 'getSecToTime']),
         ];
     }
 
@@ -30,5 +31,18 @@ class LibraryExtension extends AbstractExtension
         $installed = 'Oui';
         if (!$isInstalled) $installed = 'Non';
         return $installed;
+    }
+
+    /**
+     * @param int $seconds
+     * @return string
+     */
+    public function getSecToTime(int $seconds): string
+    {
+        $hours = floor($seconds / 3600);
+        $seconds = $seconds - 3600 * $hours;
+        $mins = floor($seconds / 60);
+        $seconds = $seconds - 60 * $mins;
+        return $hours . 'h ' . $mins . 'm ' . $seconds . '\'';
     }
 }
