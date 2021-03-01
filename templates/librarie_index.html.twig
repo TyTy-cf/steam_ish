@@ -11,19 +11,27 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>(I)</th>
                 <th>Nom</th>
-                <th></th>
+                <th>Temps de jeu</th>
+                <th>Dernière utilisation</th>
             </tr>
             </thead>
             <tbody>
-            {% for library in libraries %}
-                <tr>
-                    <td>{{ library.game.name }}</td>
-                    <td>
-
-                    </td>
-                </tr>
-            {% endfor %}
+                {% if libraries|length > 0 %}
+                    {% for library in libraries %}
+                        <tr>
+                            <td>{{ library.installed|game_installed }}</td>
+                            <td>{{ library.game.name }}</td>
+                            <td>{{ library.gameTime }}</td>
+                            <td>{{ library.lastUsed|date('m/d/Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4">Aucun jeu dans cette bibliothèque</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>
