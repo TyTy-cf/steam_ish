@@ -17,18 +17,50 @@
 {% block body %}
 
     <div class="container">
-        <div>
+        <div class="mb-3">
             <a class="btn btn-primary" href="{{ path('accounts_new') }}">
                 {{ 'account.title_header'|trans }}
             </a>
         </div>
+        {{ form_start(filters) }}
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ 'account.form.name'|trans }}</th>
-                <th>{{ 'account.form.email'|trans }}</th>
-                <th>{{ 'account.form.nickname'|trans }}</th>
-                <th></th>
+                <th>
+                    {{ knp_pagination_sortable(
+                        accounts,
+                        'account.form.name'|trans,
+                        'account.name'
+                    )|raw }}
+                    {{ form_widget(filters.name) }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(
+                        accounts,
+                        'account.form.email'|trans,
+                        'account.email'
+                    )|raw }}
+                    {{ form_widget(filters.email) }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(
+                        accounts,
+                        'account.form.nickname'|trans,
+                        'account.nickname'
+                    )|raw }}
+                    {{ form_widget(filters.nickname) }}
+                </th>
+                <th>
+                    Action
+                    <div>
+                        <button type="submit">
+                            Filtrer
+                        </button>
+                        <a href="{{ path('accounts_index') }}">
+                            Reset
+                        </a>
+                    </div>
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -46,7 +78,10 @@
             {% endfor %}
             </tbody>
         </table>
-
+        {{ form_end(filters) }}
+        <div class="pagination">
+            {{ knp_pagination_render(accounts) }}
+        </div>
     </div>
 
 {% endblock %}
