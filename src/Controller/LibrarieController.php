@@ -19,7 +19,7 @@ class LibrarieController extends AbstractController
 {
 
     /**
-     * @Route("/account/{id}/librarie/", name="index_librarie")
+     * @Route("/accounts/{id}/librarie/", name="index_librarie")
      *
      * @param Accounts $account
      * @param LibrarieRepository $librarieRepository
