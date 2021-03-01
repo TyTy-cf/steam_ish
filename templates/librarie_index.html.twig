@@ -1,27 +1,29 @@
 
+{% extends 'base.html.twig' %}
+
 {% block title %}
     Account de {{ account.name }}
 {% endblock %}
 
 {% block body %}
-
-    <table>
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for library in libraries %}
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ library.game.name }}</td>
-                <td>
-
-                </td>
+                <th>Nom</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for library in libraries %}
+                <tr>
+                    <td>{{ library.game.name }}</td>
+                    <td>
 
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

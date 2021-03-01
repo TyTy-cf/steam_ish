@@ -24,7 +24,7 @@ class AccountsController extends AbstractController
      */
     public function index(AccountRepository $repoAccount): Response {
         return $this->render('account_index.html.twig', [
-            'accounts' => $repoAccount->findByDomain('gmail'),
+            'accounts' => $repoAccount->findAll(),
         ]);
     }
 

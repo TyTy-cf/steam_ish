@@ -1,20 +1,22 @@
 
+{% extends 'base.html.twig' %}
+
 {% block title %}
     Tous les accounts de Steam-Ish
 {% endblock %}
 
 {% block body %}
-
-    <table>
-        <thead>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Nickname</th>
                 <th></th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for account in accounts %}
                 <tr>
                     <td>{{ account.name }}</td>
@@ -25,7 +27,7 @@
                     </td>
                 </tr>
             {% endfor %}
-        </tbody>
-    </table>
-
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

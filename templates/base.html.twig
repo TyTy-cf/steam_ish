@@ -11,7 +11,17 @@
     </head>
 
     <body>
+        {% block header %}
+            <div class="text-center header">
+                Header de Steam-Ish
+            </div>
+
+        {% endblock %}
+
         {% block body %}
+        {% endblock %}
+
+        {% block footer %}
         {% endblock %}
 
         {% block javascripts %}
