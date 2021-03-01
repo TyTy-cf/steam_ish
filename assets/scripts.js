@@ -5,5 +5,5 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-// any CSS you import will output into a single css file (global.scss in this case)
+// any CSS you import will output into a single css file (commons.scss in this case)
 import './scripts/scripts';

@@ -18,7 +18,7 @@ Encore
      * ENTRY CONFIG
      *
      * Each entry will result in one JavaScript file (e.g. scripts.js)
-     * and one CSS file (e.g. global.scss) if your JavaScript imports CSS.
+     * and one CSS file (e.g. commons.scss) if your JavaScript imports CSS.
      */
     .addEntry('scripts', './assets/scripts.js')
     .addEntry('styles', './assets/styles.scss')
