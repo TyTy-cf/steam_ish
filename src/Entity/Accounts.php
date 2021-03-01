@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AccountRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,21 @@ class Accounts
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nickname;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Libraries::class, mappedBy="account")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $libraries;
+
+    /**
+     * Accounts constructor.
+     * @param $libraries
+     */
+    public function __construct()
+    {
+        $this->libraries = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -71,6 +88,19 @@ class Accounts
         $this->nickname = $nickname;
 
         return $this;
+    }
+
+    public function addLibrary(Libraries $lib): Accounts
+    {
+        if (!$this->libraries->contains($lib)) {
+            $this->libraries->add($lib);
+        }
+        return $this;
+    }
+
+    public function getLibraries(): Collection
+    {
+        return $this->libraries;
     }
 
 }

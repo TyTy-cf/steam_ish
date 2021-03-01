@@ -1,0 +1,10 @@
+
+account:
+    title: "Nouveau compte"
+    title_header: "Création d'un compte"
+    form:
+        name: "Nom"
+        email: "Email"
+        nickname: "Pseudo"
+    index:
+        games: "Ses jeux (%nb%)"
