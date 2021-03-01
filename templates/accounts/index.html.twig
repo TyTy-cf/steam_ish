@@ -1,6 +1,8 @@
 
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'general' %}
+
 {% block title %}
     Tous les accounts de Steam-Ish
 {% endblock %}
@@ -15,7 +17,11 @@
 {% block body %}
 
     <div class="container">
-
+        <div>
+            <a class="btn btn-primary" href="{{ path('accounts_new') }}">
+                Créer un compte
+            </a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -32,7 +38,9 @@
                     <td>{{ account.email }}</td>
                     <td>{{ account.nickname }}</td>
                     <td>
-                        <a href="{{ path('index_librarie', {'id': account.id}) }}">Ses jeux</a>
+                        <a href="{{ path('index_librarie', {'id': account.id}) }}">
+                            {{ 'account.index.games'|trans({'%nb%': account.libraries|length }) }}
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

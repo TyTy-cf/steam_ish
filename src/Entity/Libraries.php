@@ -39,7 +39,7 @@ class Libraries
     private $game;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Accounts::class)
+     * @ORM\ManyToOne(targetEntity=Accounts::class, inversedBy="libraries")
      * @ORM\JoinColumn(nullable=false)
      */
     private $account;
