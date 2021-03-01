@@ -11,7 +11,21 @@
     </head>
 
     <body>
+        {% block header %}
+            <div class="text-center header">
+                Header de Steam-Ish
+            </div>
+            <hr>
+        {% endblock %}
+
         {% block body %}
+        {% endblock %}
+
+        {% block footer %}
+            <hr>
+            <div class="text-center footer">
+                footer de combat
+            </div>
         {% endblock %}
 
         {% block javascripts %}
