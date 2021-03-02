@@ -51,13 +51,13 @@ class CommentsRepository extends ServiceEntityRepository
      */
     public function queryCommentsByGame(Games $game): QueryBuilder
     {
-        return $this->createQueryBuilder('c')
-            ->select('c', 'account', 'game')
-            ->join('c.account', 'account')
-            ->join('c.game', 'game')
-            ->andWhere('c.game = :game')
+        return $this->createQueryBuilder('comments')
+            ->select('comments', 'account')
+            ->join('comments.account', 'account')
+            ->join('comments.game', 'game')
+            ->andWhere('comments.game = :game')
             ->setParameter('game', $game)
-            ->orderBy('c.createAt', 'DESC')
+            ->orderBy('comments.createAt', 'DESC')
         ;
     }
 

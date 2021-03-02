@@ -4,7 +4,7 @@
 {% trans_default_domain 'general' %}
 
 {% block title %}
-    {{ 'Détail du jeu ' ~ game.name ~ '-' }}
+    {{ game.name }}
 {% endblock %}
 
 {% block body %}
@@ -20,17 +20,14 @@
                     </div>
                 </div>
             </div>
-
             <div class="mt-1">
                 <p>Année de sortie :
                     <strong>{{ game.publishedAt|date('d/m/Y') }}</strong>
                 </p>
-
                 <p>Prix :
                     <strong>{{ game.price }}€</strong>
                 </p>
             </div>
-
             <div class="card-footer row ml-1">
                 {% for genre in game.genres %}
                     <a class="btn btn-info mr-2" href="#">
@@ -39,13 +36,16 @@
                 {% endfor %}
             </div>
         </div>
+
         <div>
             <div class="pagination">
                 {{ knp_pagination_render(comments) }}
             </div>
-            {% for comment in comments %}
-                {% include 'cards/_card_games_comments.html.twig' %}
-            {% endfor %}
+            <div>
+                {% for comment in comments %}
+                    {% include 'cards/_card_games_comments.html.twig' %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
