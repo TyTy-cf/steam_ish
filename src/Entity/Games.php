@@ -44,6 +44,16 @@ class Games
      */
     private $languages;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnailCover;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnailLogo;
+
     public function __construct()
     {
         $this->genres = new ArrayCollection();
@@ -135,6 +145,30 @@ class Games
     public function removeLanguage(Languages $language): self
     {
         $this->languages->removeElement($language);
+
+        return $this;
+    }
+
+    public function getThumbnailCover(): ?string
+    {
+        return $this->thumbnailCover;
+    }
+
+    public function setThumbnailCover(?string $thumbnailCover): self
+    {
+        $this->thumbnailCover = $thumbnailCover;
+
+        return $this;
+    }
+
+    public function getThumbnailLogo(): ?string
+    {
+        return $this->thumbnailLogo;
+    }
+
+    public function setThumbnailLogo(?string $thumbnailLogo): self
+    {
+        $this->thumbnailLogo = $thumbnailLogo;
 
         return $this;
     }
