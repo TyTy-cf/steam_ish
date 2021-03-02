@@ -20,6 +20,27 @@
         <p>
             {{ notstashedvalue|default('Cette variable n\'existe pas')  }}
         </p>
+
+        <div>
+            {# Mettre en majuscule #}
+            <p>{{ name|upper }}</p>
+            {# Mettre en minuscule #}
+            <p>{{ name|lower }}</p>
+            {# Rempalcer le contenu d'une chaine #}
+            <p>{{ name|replace({'hotmail': 'gmail'}) }}</p>
+        </div>
+
+        {# Itération sur les K, V #}
+        {% for nav, info in array %}
+            <p>{{ nav }} : {{ info }}</p>
+        {% endfor %}
+
+        {# Renvoie la valeur absolu #}
+        <p>{{ number|abs }}</p>
+
+        <i class="fa fa-plus-square">
+
+        </i>
+
     </div>
 {% endblock %}
-
