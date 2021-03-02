@@ -1,0 +1,24 @@
+
+{% trans_default_domain 'general' %}
+
+<div class="card border-dark mb-3">
+    <div class="card-header">
+        <h5>
+            <a href="{{ path('index_librarie', {'idAcc': comment.account.id}) }}">
+                {{ comment.account.nickname }}
+            </a>
+        </h5>
+        <div>
+            <i class="fas fa-thumbs-up green"> {{ comment.upVotes }}</i>
+            <i class="fas fa-thumbs-down red"> {{ comment.downVotes }}</i>
+        </div>
+    </div>
+    <div class="card-body">
+        {{ comment.content }}
+    </div>
+    <div class="card-footer">
+        <p>
+            À {{ comment.createAt|date('d/m/Y') }}
+        </p>
+    </div>
+</div>
