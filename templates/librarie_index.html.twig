@@ -9,61 +9,61 @@
 
 {% block body %}
 
+
     <div class="container">
-        <table class="table table-striped col-6">
-            <tbody>
-                <tr>
-                    <th>{{ 'account.form.name'|trans }}</th>
-                    <td>{{ account.name }}</td>
-                </tr>
-                <tr>
-                    <th>{{ 'account.form.email'|trans }}</th>
-                    <td>{{ account.email }}</td>
-                </tr>
-                <tr>
-                    <th>{{ 'account.form.nickname'|trans }}</th>
-                    <td>{{ account.nickname }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="mb-2">
-            <a href="{{ path('accounts_edit', {'id': account.id}) }}" class="btn btn-info">
-                {{ 'account.library.edit'|trans }}
-            </a>
+
+        <div class="card border-primary mb-3" style="max-width: 30rem;">
+            <div class="card-body text-primary d-flex align-content-center align-items-center justify-content-around">
+                <div>
+                    <h5 class="card-title">{{ account.name }} (aka <i>{{ account.nickname }}</i>)</h5>
+                    <h6 class="card-subtitle text-muted">{{ account.email }}</h6>
+                    <p class="card-text mt-2">Temps de jeu total: {{ PDSTOTAL | sec_to_time }}</p>
+                </div>
+                <div>
+                    <a href="{{ path('accounts_edit', {'id': account.id}) }}" class="btn btn-primary">
+                        {{ 'account.library.edit'|trans }}
+                    </a>
+                </div>
+            </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>{{ 'account.library.installed'|trans }}</th>
-                <th>{{ 'account.library.name'|trans }}</th>
-                <th>{{ 'account.library.game_time'|trans }}</th>
-                <th>{{ 'account.library.last_used'|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-                {% if libraries|length > 0 %}
-                    {% set totalDuration = 0 %}
-                    {% for library in libraries %}
-                        <tr>
-                            <td>{{ library.installed|game_installed }}</td>
-                            <td>{{ library.game.name }}</td>
-                            <td>{{ library.gameTime|sec_to_time }}</td>
-                            <td>{{ library.lastUsed|date('m/d/Y') }}</td>
-                        </tr>
-                        {% set totalDuration = totalDuration + library.gameTime %}
-                    {% endfor %}
-                {% else %}
-                    <tr>
-                        <td colspan="4">Aucun jeu dans cette bibliothèque</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% if libraries|length > 0 %}
+                {% set totalDuration = 0 %}
+                {% for library in libraries %}
+                    <div class="col">
+                        <div class="card border-dark mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">{{ library.game.name }}</h5>
+                                    {% if library.installed|game_installed == "Oui" %}
+                                        <h6 class="card-subtitle mb-2 text-success">Installé</h6>
+                                    {% else %}
+                                        <h6 class="card-subtitle mb-2 text-muted">Non installé</h6>
+                                    {% endif %}
+                                <p class="card-text"><small>Temps de jeu : {{ library.gameTime|sec_to_time }}</small></p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ 'account.library.last_used'|trans }}: {{ library.lastUsed|date('m/d/Y') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% set totalDuration = totalDuration + library.gameTime %}
+                {% endfor %}
+            {% else %}
+                <div>Aucun jeu dans cette bibliothèque</div>
+            {% endif %}
+        </div>
+
+
+
+
         <div class="col-7 text-right">
             <strong>
                 {{ 'account.library.total'|trans }}
             </strong> : {{ totalDuration|sec_to_time }}
         </div>
+
     </div>
+
 
 {% endblock %}

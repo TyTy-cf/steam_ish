@@ -25,13 +25,22 @@ class LibrarieController extends AbstractController
      * @param LibrarieRepository $librarieRepository
      * @return Response
      */
-    public function index(
-        Accounts $account,
-        LibrarieRepository $librarieRepository
-    ) {
+    public function index(Accounts $account, LibrarieRepository $librarieRepository){
+
+        $libraries = $librarieRepository->findLibrariesByAccount($account);
+        $PDSTOTAL = 0;
+        foreach ($libraries as $lib){
+            $PDSTOTAL = $PDSTOTAL + $lib->getGameTime();
+        }
+
+
+
+
+
         return $this->render('librarie_index.html.twig', [
            'account' => $account,
            'libraries' => $librarieRepository->findLibrariesByAccount($account),
+            'PDSTOTAL' => $PDSTOTAL
         ]);
     }
 
