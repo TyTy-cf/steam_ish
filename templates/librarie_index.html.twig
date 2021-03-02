@@ -9,15 +9,15 @@
 
 {% block body %}
 
-
     <div class="container">
-
         <div class="card border-primary mb-3" style="max-width: 30rem;">
             <div class="card-body text-primary d-flex align-content-center align-items-center justify-content-around">
                 <div>
                     <h5 class="card-title">{{ account.name }} (aka <i>{{ account.nickname }}</i>)</h5>
                     <h6 class="card-subtitle text-muted">{{ account.email }}</h6>
-                    <p class="card-text mt-2">Temps de jeu total: {{ PDSTOTAL | sec_to_time }}</p>
+                    <p class="card-text mt-2">Temps de jeu total:
+                        <strong>{{ totalGameTime|sec_to_time }}</strong>
+                    </p>
                 </div>
                 <div>
                     <a href="{{ path('accounts_edit', {'id': account.id}) }}" class="btn btn-primary">
@@ -29,31 +29,13 @@
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% if libraries|length > 0 %}
-                {% set totalDuration = 0 %}
                 {% for library in libraries %}
-                    <div class="col">
-                        <div class="card border-dark mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">{{ library.game.name }}</h5>
-                                    {% if library.installed|game_installed == "Oui" %}
-                                        <h6 class="card-subtitle mb-2 text-success">Installé</h6>
-                                    {% else %}
-                                        <h6 class="card-subtitle mb-2 text-muted">Non installé</h6>
-                                    {% endif %}
-                                <p class="card-text"><small>Temps de jeu : {{ library.gameTime|sec_to_time }}</small></p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">{{ 'account.library.last_used'|trans }}: {{ library.lastUsed|date('m/d/Y') }}</small>
-                            </div>
-                        </div>
-                    </div>
-                    {% set totalDuration = totalDuration + library.gameTime %}
+                    {% include 'cards/_card_games.html.twig' %}
                 {% endfor %}
             {% else %}
                 <div>Aucun jeu dans cette bibliothèque</div>
             {% endif %}
         </div>
-
     </div>
 
 

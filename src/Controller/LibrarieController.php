@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Entity\Accounts;
 use App\Repository\LibrarieRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,23 +26,17 @@ class LibrarieController extends AbstractController
      * @param Accounts $account
      * @param LibrarieRepository $librarieRepository
      * @return Response
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
-    public function index(Accounts $account, LibrarieRepository $librarieRepository){
-
-        $libraries = $librarieRepository->findLibrariesByAccount($account);
-        $PDSTOTAL = 0;
-        foreach ($libraries as $lib){
-            $PDSTOTAL = $PDSTOTAL + $lib->getGameTime();
-        }
-
-
-
-
-
+    public function index(
+        Accounts $account,
+        LibrarieRepository $librarieRepository
+    ) {
         return $this->render('librarie_index.html.twig', [
-           'account' => $account,
-           'libraries' => $librarieRepository->findLibrariesByAccount($account),
-            'PDSTOTAL' => $PDSTOTAL
+            'account' => $account,
+            'libraries' => $librarieRepository->findLibrariesByAccount($account),
+            'totalGameTime' => $librarieRepository->getTotalGameTimeByAccount($account),
         ]);
     }
 

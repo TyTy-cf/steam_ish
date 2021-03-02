@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Libraries;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -33,6 +35,29 @@ class LibrarieRepository extends ServiceEntityRepository
             ->orderBy('game.name', 'ASC')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     *  SELECT sum(libraries.game_time), accounts.name
+     *  FROM libraries
+     *  JOIN accounts
+     *  ON accounts.id = libraries.account_id
+     *  GROUP BY accounts.name
+     *
+     * @param $account
+     * @return int|mixed|string
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getTotalGameTimeByAccount($account) {
+        return $this->createQueryBuilder('libraries')
+            ->select('SUM(libraries.gameTime)')
+            ->join('libraries.account', 'account')
+            ->andWhere('libraries.account = :account')
+            ->setParameter('account', $account)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 
