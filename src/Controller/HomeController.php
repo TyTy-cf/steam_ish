@@ -29,6 +29,15 @@ class HomeController extends AbstractController
      * @return Response
      */
     public function test() {
-        return $this->render('souk/test.html.twig');
+        return $this->render('souk/test.html.twig', [
+            'name' => 'TwigDeTest@hotmail.de',
+            'array' => [
+                'IE' => 'C\'est nul',
+                'chrome' => 'C\'est mieux',
+                'MFF' => 'C\'est OK',
+                'safari' => 'Ca existe ?',
+            ],
+            'number' => -10,
+        ]);
     }
 }
