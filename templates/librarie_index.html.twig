@@ -13,7 +13,9 @@
         <div class="card border-primary mb-3" style="max-width: 30rem;">
             <div class="card-body text-primary d-flex align-content-center align-items-center justify-content-around">
                 <div>
-                    <h5 class="card-title">{{ account.name }} (aka <i>{{ account.nickname }}</i>)</h5>
+                    <h5 class="card-title">{{ account.name }}
+                        (aka <i>{{ account.nickname }}</i>)
+                    </h5>
                     <h6 class="card-subtitle text-muted">{{ account.email }}</h6>
                     <p class="card-text mt-2">Temps de jeu total:
                         <strong>{{ totalGameTime|sec_to_time }}</strong>

@@ -70,7 +70,7 @@
                     <td>{{ account.email }}</td>
                     <td>{{ account.nickname }}</td>
                     <td>
-                        <a href="{{ path('index_librarie', {'id': account.id}) }}">
+                        <a href="{{ path('index_librarie', {'idAcc': account.id}) }}">
                             {{ 'account.index.games'|trans({'%nb%': account.libraries|length }) }}
                         </a>
                     </td>

@@ -28,11 +28,12 @@ class LibrarieRepository extends ServiceEntityRepository
     public function findLibrariesByAccount($account): array
     {
         return $this->createQueryBuilder('librarie')
+            ->select('librarie', 'game', 'account')
             ->join('librarie.account', 'account')
             ->join('librarie.game', 'game')
             ->andWhere('librarie.account = :account')
             ->setParameter('account', $account)
-            ->orderBy('game.name', 'ASC')
+            ->orderBy('librarie.installed', 'DESC')
             ->getQuery()
             ->getResult()
         ;

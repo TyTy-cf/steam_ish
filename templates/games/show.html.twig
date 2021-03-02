@@ -1,0 +1,52 @@
+
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'general' %}
+
+{% block title %}
+    {{ 'Détail du jeu ' ~ game.name ~ '-' }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="card border-primary p-2">
+            <div class="card-header">
+                <div>
+                    <h2>{{ game.name }}</h2>
+                    <div>
+                        <i class="fas fa-thumbs-up green"> {{ totalUpVotes }}</i>
+                        <i class="fas fa-thumbs-down red"> {{ totalDownVotes }}</i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-1">
+                <p>Année de sortie :
+                    <strong>{{ game.publishedAt|date('d/m/Y') }}</strong>
+                </p>
+
+                <p>Prix :
+                    <strong>{{ game.price }}€</strong>
+                </p>
+            </div>
+
+            <div class="card-footer row ml-1">
+                {% for genre in game.genres %}
+                    <a class="btn btn-info mr-2" href="#">
+                        {{ genre.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <div class="pagination">
+                {{ knp_pagination_render(comments) }}
+            </div>
+            {% for comment in comments %}
+                {% include 'cards/_card_games_comments.html.twig' %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock body %}

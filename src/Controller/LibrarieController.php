@@ -8,6 +8,7 @@ use App\Entity\Accounts;
 use App\Repository\LibrarieRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,10 @@ class LibrarieController extends AbstractController
 {
 
     /**
-     * @Route("/accounts/{id}/librarie/", name="index_librarie")
+     * @Route("/accounts/{idAcc}/librarie", name="index_librarie")
+     * @ParamConverter("account", options={"mapping": {
+     *      "idAcc": "id"
+     * }})
      *
      * @param Accounts $account
      * @param LibrarieRepository $librarieRepository

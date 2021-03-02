@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Games;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,24 @@ class GamesRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Games::class);
+    }
+
+    /**
+     * @param int $id
+     * @return int|mixed|string|null
+     * @throws NonUniqueResultException
+     */
+    public function findGameById(int $id)
+    {
+        return $this->createQueryBuilder('g')
+            ->select('g','genres', 'languages')
+            ->join('g.genres', 'genres')
+            ->join('g.languages', 'languages')
+            ->andWhere('g.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     // /**
