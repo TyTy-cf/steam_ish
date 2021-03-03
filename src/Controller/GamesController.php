@@ -6,8 +6,8 @@ namespace App\Controller;
 
 use App\Repository\CommentsRepository;
 use App\Repository\GamesRepository;
+use App\Repository\GenreRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class GamesController.php
+ * @Route("/games")
  *
  * @author Kevin Tourret
  */
@@ -23,27 +24,59 @@ class GamesController extends AbstractController
 {
 
     /**
-     * @Route("/games/{id}/show", name="games_show")
-     *
-     * @param Request $request
+     * @var GamesRepository $gamesRepository
+     */
+    private $gamesRepository;
+
+    /**
+     * @var CommentsRepository $commentsRepository,
+     */
+    private $commentsRepository;
+
+    /**
+     * @var PaginatorInterface $paginator
+     */
+    private $paginator;
+
+    /**
+     * @var GenreRepository $genreRepository
+     */
+    private $genreRepository;
+
+    /**
+     * GamesController constructor.
      * @param GamesRepository $gamesRepository
      * @param CommentsRepository $commentsRepository
+     * @param GenreRepository $genreRepository
      * @param PaginatorInterface $paginator
+     */
+    public function __construct(
+        GamesRepository $gamesRepository,
+        CommentsRepository $commentsRepository,
+        GenreRepository $genreRepository,
+        PaginatorInterface $paginator
+    ) {
+        $this->gamesRepository = $gamesRepository;
+        $this->commentsRepository = $commentsRepository;
+        $this->genreRepository = $genreRepository;
+        $this->paginator = $paginator;
+    }
+
+    /**
+     * @Route("/{id}/show", name="games_show")
+     *
+     * @param Request $request
      * @return Response
-     * @throws NoResultException
      * @throws NonUniqueResultException
      */
     public function show(
-        Request $request,
-        GamesRepository $gamesRepository,
-        CommentsRepository $commentsRepository,
-        PaginatorInterface $paginator
-    ) {
-        $game = $gamesRepository->findGameById($request->get('id'));
+        Request $request
+    ): Response {
+        $game = $this->gamesRepository->findGameById($request->get('id'));
 
-        $qb = $commentsRepository->queryCommentsByGame($game);
+        $qb = $this->commentsRepository->queryCommentsByGame($game);
 
-        $comments = $paginator->paginate(
+        $comments = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
             5
@@ -51,9 +84,32 @@ class GamesController extends AbstractController
 
         return $this->render('games/show.html.twig', [
             'game' => $game,
-            'totalUpVotes' => $commentsRepository->getTotalVotesByGames($game),
-            'totalDownVotes' => $commentsRepository->getTotalVotesByGames($game, false),
             'comments' => $comments,
+        ]);
+    }
+
+    /**
+     * @Route("/store/{id}", name="games_store_filtered")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function storeFiltered(
+        Request $request
+    ) {
+        $genre = $this->genreRepository->findOneBy(['id' => $request->get('id')]);
+
+        $qb = $this->gamesRepository->queryGameByGenre($genre);
+
+        $games = $this->paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            3
+        );
+
+        return $this->render('games/store_filtered.html.twig', [
+            'genre' => $genre,
+            'games' => $games,
         ]);
     }
 }

@@ -1,0 +1,33 @@
+
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'general' %}
+
+{% block title %}
+    {{ genre.name }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>
+            Jeux de genre : <span class="btn btn-info fake-btn">{{ genre.name }}</span>
+        </h2>
+
+        <div>
+            <div class="pagination">
+                {{ knp_pagination_render(games) }}
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for game in games %}
+                    <div class="col game-card">
+                        <a href="{{ path('games_show', {'id': game.id}) }}">
+                            {% include 'cards/_card_games.html.twig' %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

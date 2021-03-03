@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Games;
+use App\Entity\Genres;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -35,6 +37,21 @@ class GamesRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * @param Genres|null $genre
+     * @return QueryBuilder
+     */
+    public function queryGameByGenre(?Genres $genre): QueryBuilder
+    {
+        return $this->createQueryBuilder('games')
+            ->select('games','genres', 'languages')
+            ->join('games.genres', 'genres')
+            ->join('games.languages', 'languages')
+            ->andWhere('genres = :genre')
+            ->setParameter('genre', $genre)
         ;
     }
 

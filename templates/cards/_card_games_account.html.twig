@@ -1,0 +1,23 @@
+
+{% trans_default_domain 'general' %}
+
+<div class="col">
+    <a href="{{ path('games_show', {'id': library.game.id}) }}">
+        <div class="card border-dark mb-3">
+            <div class="card-body">
+                <h5 class="card-title text-dark">
+                        {{ library.game.name }}
+                </h5>
+                {% if library.installed|game_installed == "Oui" %}
+                    <h6 class="card-subtitle mb-2 text-success">Installé</h6>
+                {% else %}
+                    <h6 class="card-subtitle mb-2 text-muted">Non installé</h6>
+                {% endif %}
+                <p class="card-text"><small>Temps de jeu : {{ library.gameTime|sec_to_time }}</small></p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ 'account.library.last_used'|trans }} : {{ library.lastUsed|date('m/d/Y') }}</small>
+            </div>
+        </div>
+    </a>
+</div>

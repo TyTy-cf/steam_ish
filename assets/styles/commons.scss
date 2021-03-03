@@ -23,3 +23,13 @@ body {
 .red {
     color: #c91414;
 }
+
+.fake-btn {
+    pointer-events: none;
+}
+
+.game-card {
+    > .card {
+        height: 400px;
+    }
+}
