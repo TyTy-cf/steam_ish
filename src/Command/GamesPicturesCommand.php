@@ -2,7 +2,6 @@
 
 namespace App\Command;
 
-use App\Repository\GameRepository;
 use App\Repository\GamesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;

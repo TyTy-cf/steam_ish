@@ -13,7 +13,15 @@
         <div class="card border-primary p-2">
             <div class="card-header">
                 <div>
-                    <h2>{{ game.name }}</h2>
+                    <div class="row">
+                        {% if game.thumbnailLogo is not null %}
+                            <div>
+                                <img class="w-50" src="{{ game.thumbnailLogo }}" alt="{ game.name }}">
+                            </div>
+                        {% else %}
+                            <h2>{{ game.name }}</h2>
+                        {% endif %}
+                    </div>
                     <div>
                         <i class="fas fa-thumbs-up green"> {{ totalUpVotes }}</i>
                         <i class="fas fa-thumbs-down red"> {{ totalDownVotes }}</i>
