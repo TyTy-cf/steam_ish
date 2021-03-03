@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Genres;
 use App\Repository\GamesRepository;
-use App\Repository\GenreRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,15 +25,23 @@ class GenreController extends AbstractController
      * @param Genre $genre
      * @param Request $request
      * @param GamesRepository $gamesRepository
-     * @param GenreRepository $genreRepository
+     * @param PaginatorInterface $paginator
      * @return Response
      */
     public function showGames(
         Request $request,
         Genres $genres,
-        GamesRepository $gamesRepository
+        GamesRepository $gamesRepository,
+        PaginatorInterface $paginator
     ) {
-        $games = $gamesRepository->findGenreById($request->get('id'));
+        $qb = $gamesRepository->findGenreById($request->get('id'));
+
+
+        $games = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            3
+        );
 
 
         return $this->render('games/genres.html.twig', [
