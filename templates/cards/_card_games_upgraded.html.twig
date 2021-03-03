@@ -1,0 +1,45 @@
+{% trans_default_domain 'general' %}
+
+<div class="card">
+	<div class="card-header">
+		<div class="row">
+			<div class="col-md-6">
+				{% if game.thumbnailLogo is not null %}
+						<img class="img-fluid" src="{{ game.thumbnailLogo }}" alt="{ game.name }}">
+				{% else %}
+					<h2>{{ game.name }}</h2>
+				{% endif %}
+			</div>
+			<div class="col-md-2 offset-md-4">
+				{% if totalUpVotes is defined %}
+					<div>
+						<i class="fas fa-thumbs-up green">
+							{{ totalUpVotes }}</i>
+						<i class="fas fa-thumbs-down red">
+							{{ totalDownVotes }}</i>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			{% if game.thumbnailCover is not null %}
+				<div class="col-md-6">
+					<img class="img-fluid" src="{{ game.thumbnailCover }}" alt="{ game.name }}">
+				</div>
+			{% endif %}
+			<div class="col-md-3">
+				<p class="mt-2">Année de sortie : <strong>{{ game.publishedAt|date('d/m/Y') }}</strong> </p>
+				<p>Prix : <strong>{{ game.price }}€</strong></p>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		{% for genre in game.genres %}
+			<a class="btn btn-info mr-2" href={{ path('genres', {'id': genre.id} ) }}>
+				{{ genre.name }}
+			</a>
+		{% endfor %}
+	</div>
+</div>

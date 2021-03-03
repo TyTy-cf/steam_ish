@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'general' %}
+
+{% block title %}
+	Jeux par genre
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h2>{{ genre.name }}</h2>
+		<hr>
+		<div class="row">
+			{% for game in games %}
+				<div class="col-md-4">
+					{% include 'cards/_card_games_upgraded.html.twig' %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock body %}

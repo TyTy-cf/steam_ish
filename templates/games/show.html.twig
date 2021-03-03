@@ -10,45 +10,7 @@
 {% block body %}
 
     <div class="container">
-        <div class="card border-primary p-2">
-            <div class="card-header">
-                <div>
-                    <div class="row">
-                        {% if game.thumbnailLogo is not null %}
-                            <div>
-                                <img class="w-50" src="{{ game.thumbnailLogo }}" alt="{ game.name }}">
-                            </div>
-                        {% else %}
-                            <h2>{{ game.name }}</h2>
-                        {% endif %}
-                    </div>
-                    <div>
-                        <i class="fas fa-thumbs-up green"> {{ totalUpVotes }}</i>
-                        <i class="fas fa-thumbs-down red"> {{ totalDownVotes }}</i>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-1">
-                {% if game.thumbnailCover is not null %}
-                    <div>
-                        <img class="w-25" src="{{ game.thumbnailCover }}" alt="{ game.name }}">
-                    </div>
-                {% endif %}
-                <p class="mt-2">Année de sortie :
-                    <strong>{{ game.publishedAt|date('d/m/Y') }}</strong>
-                </p>
-                <p>Prix :
-                    <strong>{{ game.price }}€</strong>
-                </p>
-            </div>
-            <div class="card-footer row ml-1">
-                {% for genre in game.genres %}
-                    <a class="btn btn-info mr-2" href="#">
-                        {{ genre.name }}
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
+        {% include 'cards/_card_games_upgraded.html.twig' %}
 
         <div>
             <div class="pagination">
