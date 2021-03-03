@@ -38,6 +38,23 @@ class GamesRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param int $id
+     * @return int|mixed|string|null
+     * @throws NonUniqueResultException
+     */
+    public function findGenreById(int $id)
+    {
+        return $this->createQueryBuilder('g')
+            ->select('g','genres')
+            ->join('g.genres', 'genres')
+            ->andWhere('genres.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Games[] Returns an array of Games objects
     //  */
