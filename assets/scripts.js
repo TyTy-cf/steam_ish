@@ -7,3 +7,8 @@
 
 // any CSS you import will output into a single css file (commons.scss in this case)
 import './scripts/scripts';
+
+
+import 'bootstrap';
+import 'popper.js';
+

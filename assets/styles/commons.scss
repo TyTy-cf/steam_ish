@@ -23,3 +23,10 @@ body {
 .red {
     color: #c91414;
 }
+
+
+.genres-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

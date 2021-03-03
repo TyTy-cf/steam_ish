@@ -9,20 +9,34 @@
 {% block body %}
 
 	<div class="container">
-		<h2>{{ genre.name }}</h2>
+		<div class="genres-header">
+			<h2>{{ genre.name }}</h2>
+			<div class="dropdown ml-auto">
+				<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Tout les genres
+				</a>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					{% for genre in genrestotal %}
+						<a class="dropdown-item" href={{ path('genres', {'id': genre.id} ) }}>
+							{{ genre.name }}
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 		<hr>
 		<div class="row">
 			{% for game in games %}
 				<div class="col-md-4">
-                    <a href={{ path('games_show', {'id': game.id}) }}>
-                        {% include 'cards/_card_games_upgraded.html.twig' %}
-                    </a>
+					<a href={{ path('games_show', {'id': game.id} ) }}>
+						{% include 'cards/_card_games_upgraded.html.twig' %}
+					</a>
 				</div>
 			{% endfor %}
 		</div>
-        <div class="pagination">
-            {{ knp_pagination_render(games) }}
-        </div>
+		<div class="pagination">
+			{{ knp_pagination_render(games) }}
+		</div>
 	</div>
 
 {% endblock body %}
