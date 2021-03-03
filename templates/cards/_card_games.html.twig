@@ -26,7 +26,7 @@
     </div>
     <div class="card-footer row ml-1">
         {% for genre in game.genres %}
-            <a class="btn btn-info mr-2" href="{{ path('games_genre', {'id': genre.id}) }}">
+            <a class="btn btn-info mr-1 mt-1" href="{{ path('games_genre', {'id': genre.id}) }}">
                 {{ genre.name }}
             </a>
         {% endfor %}

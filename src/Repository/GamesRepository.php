@@ -47,8 +47,9 @@ class GamesRepository extends ServiceEntityRepository
     public function queryGameByGenre(?Genres $genre): QueryBuilder
     {
         return $this->createQueryBuilder('games')
-            ->select('games','genres', 'languages')
+            ->select('games','genres_all', 'languages')
             ->join('games.genres', 'genres')
+            ->join('games.genres', 'genres_all')
             ->join('games.languages', 'languages')
             ->andWhere('genres = :genre')
             ->setParameter('genre', $genre)
