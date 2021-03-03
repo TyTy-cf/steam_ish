@@ -193,8 +193,8 @@ class GamesPicturesCommand extends Command
             'logo' => null,
         ];
         $arrayGame['Left 4 Dead 2'] = [
-            'cover' => 'https://cdn.thegamesdb.net/images/original/clearlogo/855.png',
-            'logo' => 'https://cdn.thegamesdb.net/images/original/boxart/front/855-1.jpg',
+            'cover' => 'https://cdn.thegamesdb.net/images/original/boxart/front/855-1.jpg',
+            'logo' => 'https://cdn.thegamesdb.net/images/original/clearlogo/855.png',
         ];
         $arrayGame['Battlefield V'] = [
             'cover' => 'https://cdn.thegamesdb.net/images/original/boxart/front/55756-1.jpg',

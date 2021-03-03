@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Genres;
 use App\Repository\CommentsRepository;
 use App\Repository\GamesRepository;
 use App\Repository\GenreRepository;
@@ -92,13 +93,13 @@ class GamesController extends AbstractController
      * @Route("/store/{id}", name="games_store_filtered")
      *
      * @param Request $request
+     * @param Genres $genre
      * @return Response
      */
     public function storeFiltered(
-        Request $request
+        Request $request,
+        Genres $genre
     ) {
-        $genre = $this->genreRepository->findOneBy(['id' => $request->get('id')]);
-
         $qb = $this->gamesRepository->queryGameByGenre($genre);
 
         $games = $this->paginator->paginate(
