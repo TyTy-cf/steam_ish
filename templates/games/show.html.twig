@@ -21,7 +21,12 @@
                 </div>
             </div>
             <div class="mt-1">
-                <p>Année de sortie :
+                {% if game.thumbnailCover is not null %}
+                    <div>
+                        <img src="{{ game.thumbnailCover }}" alt="{ game.name }}">
+                    </div>
+                {% endif %}
+                <p class="mt-2">Année de sortie :
                     <strong>{{ game.publishedAt|date('d/m/Y') }}</strong>
                 </p>
                 <p>Prix :

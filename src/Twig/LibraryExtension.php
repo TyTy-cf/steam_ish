@@ -23,26 +23,29 @@ class LibraryExtension extends AbstractExtension
     }
 
     /**
-     * @param bool $isInstalled
+     * @param bool|null $isInstalled
      * @return string
      */
-    public function getGameInstalled(bool $isInstalled): string
+    public function getGameInstalled(?bool $isInstalled): string
     {
-        $installed = 'Oui';
-        if (!$isInstalled) $installed = 'Non';
+        $installed = 'Non';
+        if ($isInstalled) $installed = 'Oui';
         return $installed;
     }
 
     /**
-     * @param int $seconds
+     * @param int|null $seconds
      * @return string
      */
-    public function getSecToTime(int $seconds): string
+    public function getSecToTime(?int $seconds): string
     {
-        $hours = floor($seconds / 3600);
-        $seconds = $seconds - 3600 * $hours;
-        $mins = floor($seconds / 60);
-        $seconds = $seconds - 60 * $mins;
-        return $hours . 'h ' . $mins . 'm ' . $seconds . '\'';
+        if ($seconds !== null) {
+            $hours = floor($seconds / 3600);
+            $seconds = $seconds - 3600 * $hours;
+            $mins = floor($seconds / 60);
+            $seconds = $seconds - 60 * $mins;
+            return $hours . 'h ' . $mins . 'm ' . $seconds . '\'';
+        }
+        return '';
     }
 }
