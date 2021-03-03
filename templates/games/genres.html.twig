@@ -14,7 +14,9 @@
 		<div class="row">
 			{% for game in games %}
 				<div class="col-md-4">
-					{% include 'cards/_card_games_upgraded.html.twig' %}
+                    <a href={{ path('games_show', {'id': game.id}) }}>
+                        {% include 'cards/_card_games_upgraded.html.twig' %}
+                    </a>
 				</div>
 			{% endfor %}
 		</div>
