@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Repository\GameRepository;
+use App\Repository\GamesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +17,12 @@ class GamesPicturesCommand extends Command
     /**
      * @var EntityManagerInterface
      */
-    protected EntityManagerInterface $em;
+    protected $em;
+
+    /**
+     * @var GamesRepository $gamesRepository
+     */
+    private $gamesRepository;
 
     /**
      * @return array
@@ -212,14 +218,14 @@ class GamesPicturesCommand extends Command
 
     /**
      * Constructor.
-     * @param GameRepository $gameRepository
+     * @param GamesRepository $gameRepository
      * @param EntityManagerInterface $em
      */
     public function __construct(
-        GameRepository $gameRepository,
+        GamesRepository $gameRepository,
         EntityManagerInterface $em
     ) {
-        $this->gameRepository = $gameRepository;
+        $this->gamesRepository = $gameRepository;
         $this->em = $em;
         parent::__construct();
     }
@@ -237,7 +243,7 @@ class GamesPicturesCommand extends Command
         $output->writeln('     ');
 
         foreach ($this->getPictures() as $gameName => $arrayInfoPictures) {
-            $game = $this->gameRepository->findOneBy(['name' => $gameName]);
+            $game = $this->gamesRepository->findOneBy(['name' => $gameName]);
 
             $output->writeln('     ');
             $output->writeln('<comment>Import to game : ' . $gameName);
