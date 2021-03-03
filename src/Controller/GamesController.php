@@ -90,7 +90,7 @@ class GamesController extends AbstractController
     }
 
     /**
-     * @Route("/store/{id}", name="games_store_filtered")
+     * @Route("/genre/{id}", name="games_genre")
      *
      * @param Request $request
      * @param Genres $genre
