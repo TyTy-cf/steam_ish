@@ -21,3 +21,8 @@ account:
         return_account: "Retour au compte"
         title: "Modifier compte"
     delete: "Supprimer"
+    games:
+        name: "Nom"
+        year: "Année"
+        price: "Prix"
+        genre: "Genre"

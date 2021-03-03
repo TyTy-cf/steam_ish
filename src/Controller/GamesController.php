@@ -96,7 +96,7 @@ class GamesController extends AbstractController
      * @param Genres $genre
      * @return Response
      */
-    public function storeFiltered(
+    public function gamesGenre(
         Request $request,
         Genres $genre
     ) {
@@ -108,7 +108,7 @@ class GamesController extends AbstractController
             3
         );
 
-        return $this->render('games/store_filtered.html.twig', [
+        return $this->render('games/games_by_genre.html.twig', [
             'genre' => $genre,
             'games' => $games,
         ]);

@@ -4,8 +4,14 @@
 namespace App\Controller;
 
 
+use App\Form\Filter\AccountFilterType;
+use App\Form\Filter\GameFilterType;
+use App\Repository\GamesRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,11 +23,44 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="store")
+     *
+     * @param Request $request
+     * @param GamesRepository $gamesRepository
+     * @param PaginatorInterface $paginator
+     * @param FilterBuilderUpdaterInterface $builderUpdater
+     * @return RedirectResponse
      */
-    public function home(): RedirectResponse
-    {
-        return $this->redirectToRoute('accounts_index');
+    public function home(
+        Request $request,
+        GamesRepository $gamesRepository,
+        PaginatorInterface $paginator,
+        FilterBuilderUpdaterInterface $builderUpdater
+    ): Response {
+        $qb = $gamesRepository->queryAllGames();
+
+        $filterForm = $this->createForm(GameFilterType::class, null, [
+            'method' => 'GET',
+        ]);
+
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->submit($request->query->get($filterForm->getName()));
+            $builderUpdater->addFilterConditions($filterForm, $qb);
+        }
+
+        $games = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            9,
+            [
+                'wrap-queries' => true,
+            ]
+        );
+
+        return $this->render('store.html.twig', [
+            'games' => $games,
+            'filters' => $filterForm->createView(),
+        ]);
     }
 
     /**
