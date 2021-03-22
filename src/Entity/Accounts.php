@@ -41,6 +41,11 @@ class Accounts
     private $libraries;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $wallet;
+
+    /**
      * Accounts constructor.
      * @param $libraries
      */
@@ -101,6 +106,18 @@ class Accounts
     public function getLibraries(): Collection
     {
         return $this->libraries;
+    }
+
+    public function getWallet(): ?int
+    {
+        return $this->wallet;
+    }
+
+    public function setWallet(int $wallet): self
+    {
+        $this->wallet = $wallet;
+
+        return $this;
     }
 
 }

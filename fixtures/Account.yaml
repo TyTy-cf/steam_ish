@@ -4,6 +4,7 @@ App\Entity\Accounts:
         name (unique): <userName()>
         email (unique): <email()>
         nickname: <userName()>
+        wallet: <numberBetween(0, 150)>
 
 App\Entity\Genres:
     genre_0:
