@@ -65,7 +65,7 @@ class GameController extends AbstractController
     {
         return $this->render('Front/game/show.html.twig', [
             'game' => $game,
-            'relatedGames' => $this->gameRepository->findRelatedGameByGenres($game->getGenres()),
+            'relatedGames' => $this->gameRepository->findRelatedGameByGenres($game),
         ]);
     }
 

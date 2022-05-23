@@ -109,17 +109,19 @@ class GameRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Collection $genres
+     * @param Game $game
      * @param int $limit
      * @return array
      */
-    public function findRelatedGameByGenres(Collection $genres, int $limit = 5): array
+    public function findRelatedGameByGenres(Game $game, int $limit = 5): array
     {
         return $this->createQueryBuilder('game')
             ->select('game', 'genres')
             ->join('game.genres', 'genres')
             ->where('genres IN(:genres)')
-            ->setParameter('genres', $genres)
+            ->setParameter('genres', $game->getGenres())
+            ->andWhere('game != :currentGame')
+            ->setParameter('currentGame', $game)
             ->orderBy('game.publishedAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
